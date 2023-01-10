@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -89,4 +90,53 @@ Route::get('/product/{item?}/{num?}', function($item=null, $num=null) {
     return "Product name is ".$item." item num is ".$num;
 });
 
+Route::get('sum/{num1}/{num2}', function($num1, $num2){
+    return $num1 + $num2;
+});
 
+Route::get('add/{num1}/{num2}', fn($num1, $num2) => $num1 + $num2);
+
+
+Route::get('getData', function(){
+    $data = file_get_contents("https://fakestoreapi.com/products/");
+    $jsonData = json_decode($data);
+
+    // return $jsonData;
+    // echo "<pre>";
+    // var_dump($jsonData);
+    // dd($jsonData);
+    // dd("hello");
+    // dd($jsonData[0]->title);
+    // dd($jsonData[0]->image);
+    // dd($jsonData[0]->price);
+
+    // $data = array_filter($jsonData, fn($jsonData) => $jsonData->price);
+    // $result = array_filter($jsonData, fn($j) => $j->price <= 50);
+    // $result = array_filter($jsonData, fn($j) => $j->price >= 50);
+    $result = array_filter($jsonData, fn($j) => $j->price < 10);
+    dd($result);
+
+});
+
+Route::get('laraGetData', function() {
+    $data = Http::get("https://fakestoreapi.com/products") -> object();
+    // $data = collect($data) -> where("price",'<',10)->toArray();
+    // $data = collect($data) -> last();
+    // $data = collect($data) -> max();
+    // $data = collect([1,2,34,3,5,23]) -> max();
+    $data = collect($data)->whereIn("price",[109,168]) -> toArray();
+
+    // $data = $data -> json();
+    // $data = $data -> object();
+    // dd($data[0]["price"]);
+    // dd($data[0]["image"]);
+    // dd($data[0]->title);
+    // dd($data);
+    // dd($data[6] -> title);
+    // foreach($data as $item) {
+    //     echo $item -> title."<br>";
+    // }
+
+    // dd($data -> title);
+    dd($data);
+});
