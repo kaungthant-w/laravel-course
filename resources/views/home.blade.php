@@ -28,6 +28,7 @@
     {{url('about')}} <br>
     {{url('contact')}} <br>
     <h1 style="color:red;">Home Page</h1>
+    <a href="{{ url('postTest') }}">Post method test</a>
     <h3 class="h3">{{ $name }}</h3>
     {!! $name !!}
     <h3> {{ $num1}} + {{ $num1}} = {{ $result}} </h3>

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
@@ -140,3 +141,24 @@ Route::get('laraGetData', function() {
     // dd($data -> title);
     dd($data);
 });
+
+Route::view('customers/register', 'customerRegister');
+
+//POST method
+Route::post('postTest/{id},{name}', function(Request $request, $id, $name) {
+    // return "hello my name is";
+    // return $_REQUEST["userName"];
+    // return ($request -> all());
+
+    $request -> all();
+    $userData = [
+        'name' => $request -> userName,
+        'age' => $request -> userAge,
+        'address' => $request -> userAddress,
+        'gender' => $request -> userGender
+    ];
+
+    // dd($userData);
+    dd($request -> all(), $userData, $id, $name);
+
+})->name('customerPostTest');
