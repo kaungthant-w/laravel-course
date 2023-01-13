@@ -15,7 +15,7 @@
 <body class="text-center d-flex flex-column ">
 
     <h3 class="mt-5">Customer Register Page</h3>
-    <form action="{{ route('customerPostTest', [10, 'code lab'])}}" method="POST" class="w-50 m-auto">
+    <form action="{{ route('customerPostTest')}}" method="POST" class="w-50 m-auto">
         @csrf
         Name: <input type="text" name="userName" class="form-control"> <br>
         Age: <input type="number" name="userAge" class="form-control"> <br>

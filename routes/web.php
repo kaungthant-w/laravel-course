@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
@@ -145,20 +148,10 @@ Route::get('laraGetData', function() {
 Route::view('customers/register', 'customerRegister');
 
 //POST method
-Route::post('postTest/{id},{name}', function(Request $request, $id, $name) {
-    // return "hello my name is";
-    // return $_REQUEST["userName"];
-    // return ($request -> all());
+// Route::post('postTest/',[App\Http\Controllers::class, 'adminPostTest'])->name('customerPostTest');
+Route::post('postTest/',[AdminController::class, 'adminPostTest'])->name('customerPostTest');
 
-    $request -> all();
-    $userData = [
-        'name' => $request -> userName,
-        'age' => $request -> userAge,
-        'address' => $request -> userAddress,
-        'gender' => $request -> userGender
-    ];
+// customer
+Route::get("helloTest", [CustomerController::class, 'oputputHello']);   
 
-    // dd($userData);
-    dd($request -> all(), $userData, $id, $name);
-
-})->name('customerPostTest');
+Route::get('compact/list', [CustomerController::class,"compactList"]);
