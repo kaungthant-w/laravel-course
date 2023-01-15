@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return view("landing");
@@ -51,43 +51,43 @@ Route::get('/contact', function() {
     return view("contact", ["lecture" => "Programming"]);
 });
 
-Route::get("/customer/list", function() {
-    return view("customer.list");
-});
+// Route::get("/customer/list", function() {
+//     return view("customer.list");
+// });
 
-Route::get("vipMaleCustomer", function() {
-    return view("customer.vipCustomer.male.list");
-});
+// Route::get("vipMaleCustomer", function() {
+//     return view("customer.vipCustomer.male.list");
+// });
 
-Route::get("vipFemaleCustomer", function() {
-    return view("customer.vipCustomer.female.list");
-});
+// Route::get("vipFemaleCustomer", function() {
+//     return view("customer.vipCustomer.female.list");
+// });
 
 Route::get("/user/contact", function() {
     return "user contact page";
 });
 
-Route::get("/customer/name", function() {
-    return "customer name";
-});
+// Route::get("/customer/name", function() {
+//     return "customer name";
+// });
 
 
-Route::get("/customer/{phone}", function($phone) {
-    return "customer phone number is ". $phone;
-});
+// Route::get("/customer/{phone}", function($phone) {
+//     return "customer phone number is ". $phone;
+// });
 
 
-Route::get('/customer/{name}/{age}', function($name, $age) {
-    return "customer name is ".$name." customer age is ".$age;
-});
+// Route::get('/customer/{name}/{age}', function($name, $age) {
+//     return "customer name is ".$name." customer age is ".$age;
+// });
 
-Route::get('/customer/{name}/register/{age}', function($name, $age) {
-    return "customer name is ".$name." his age is ".$age;
-});
+// Route::get('/customer/{name}/register/{age}', function($name, $age) {
+//     return "customer name is ".$name." his age is ".$age;
+// });
 
-Route::get('/customer/{name?}/{age?}', function($name="Aung Aung", $age="24") {
-    return "customer name is ".$name." his age is ".$age;
-});
+// Route::get('/customer/{name?}/{age?}', function($name="Aung Aung", $age="24") {
+//     return "customer name is ".$name." his age is ".$age;
+// });
 
 
 Route::get('/product/{item?}/{num?}', function($item=null, $num=null) {
@@ -145,13 +145,17 @@ Route::get('laraGetData', function() {
     dd($data);
 });
 
-Route::view('customers/register', 'customerRegister');
+// Route::view('customers/register', 'customerRegister');
 
 //POST method
 // Route::post('postTest/',[App\Http\Controllers::class, 'adminPostTest'])->name('customerPostTest');
-Route::post('postTest/',[AdminController::class, 'adminPostTest'])->name('customerPostTest');
+// Route::post('postTest/',[AdminController::class, 'adminPostTest'])->name('customerPostTest');
 
 // customer
-Route::get("helloTest", [CustomerController::class, 'oputputHello']);   
+// Route::get("helloTest", [CustomerController::class, 'oputputHello']);
+// Route::get('compact/list', [CustomerController::class,"compactList"]);
 
-Route::get('compact/list', [CustomerController::class,"compactList"]);
+// customer
+Route::get('customer/home', [CustomerController::class,'home'])->name("customer#home");
+Route::post('customer/insert', [CustomerController::class,'insert'])->name("customer#insert");
+Route::get('customer/read', [CustomerController::class,'read'])->name("customer#read");

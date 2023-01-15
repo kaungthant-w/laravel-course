@@ -2,21 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    public function oputputHello() {
-        // return "Hello Testing, customer controller";
-        dd("Hello dd");
+    // customer home page
+    public function home() {
+        return view("customer.insert");
     }
 
-    public function compactList() {
-        // return view('compactTest',['message'=>'hello this is testing message']);
+    // create customer data
+    public function insert(Request $request) {
 
-        $message = '<h1>hello this is testing message</h1>';
-        $error = 'this is error message';
-        $name = 'my name is sithu';
-        return view('compactTest',compact('message','error','name'));
+
+        // Carbon::now();
+        // dd(Carbon:now());
+        // dd($request->all());
+
+        // first way
+        $data = [
+            'name' => $request -> customerName,
+            'address' => $request -> customerAddress,
+            'phone' => $request -> customerPhone,
+            'created_at' => Carbon::now(),
+            'updated_at' => '2035-11-11 10:23:13'
+        ];
+
+        Customer::create($data);
+        return "Create Success...";
+
+        // sec ways
+        // $record = new Customer;
+        // $record->name = $request->customerName;
+        // $record->address = $request->customerAddress;
+        // $record->phone = $request->customerPhone;
+        // $record->created_at = Carbon::now();
+        // $record->updated_at = Carbon::now();
+        // $record->save();
+
+        // return "Created Success...";
+    }
+
+    //get customer data
+    public function read() {
+        // $data = new Customer;
+        // dd($data -> findOrFail(3)->toArray());
+
+        // dd(Customer::find(1)->toArray());
+        dd(Customer::where('address','yangon')->get()->toArray());
     }
 }
